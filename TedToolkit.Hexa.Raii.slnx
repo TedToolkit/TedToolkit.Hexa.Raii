@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/SolutionItems/">
+    <File Path=".github\workflows\build.yml" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Build/Build.csproj">
+    <Build Project="false" />
+  </Project>
+  <Project Path="TedToolkit.Hexa.Raii.Benchmark/TedToolkit.Hexa.Raii.Benchmark.csproj" />
+  <Project Path="TedToolkit.Hexa.Raii.ImGui/TedToolkit.Hexa.Raii.ImGui.csproj" />
+</Solution>
