@@ -21,13 +21,7 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
             .Select((endGenerator, index) => (endGenerator, index))
             .Where(pair => pair.endGenerator.ParameterInfos.All(info => parameterTypes.Contains(info.ParameterType)))
             .OrderByDescending(pair => pair.endGenerator.ParameterInfos.Length)
-            .FirstOrDefault();
-
-        if (endGenerator is null)
-        {
-            declaration.AddMember(Method(methodInfo.ToString()));
-            return;
-        }
+            .First();
 
         var needAddSucceed = methodInfo.ReturnType != typeof(void);
         var isResultItem = needAddSucceed && methodInfo.ReturnType != typeof(bool);
@@ -55,10 +49,9 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
             creation.AddArgument(Argument(parameter));
         }
 
-        if (needAddSucceed)
-        {
-            creation.AddArgument(Argument("succeed".ToSimpleName()));
-        }
+        creation.AddArgument(Argument(needAddSucceed
+            ? "succeed".ToSimpleName()
+            : "true".ToSimpleName()));
 
         declaration.AddMember(method
             .AddStatement(needAddSucceed
