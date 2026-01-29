@@ -77,7 +77,7 @@ internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
         var invocation = GenerateInvocations(structDeclaration);
 
         declaration.AddMember(structDeclaration
-            .AddParameter(Parameter(DataType.Bool, "succeed").AddDefault("true".ToSimpleName()))
+            .AddParameter(Parameter(DataType.Bool, "succeed"))
             .AddMember(Method(nameof(IDisposable.Dispose)).Public
                 .AddAttribute(Attribute<MethodImplAttribute>()
                     .AddArgument(Argument(MethodImplOptions.AggressiveInlining.ToExpression())))
