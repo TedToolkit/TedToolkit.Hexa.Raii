@@ -5,6 +5,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Hexa.NET.ImGui" />
+    <PackageReference Include="Hexa.NET.ImNodes" />
+    <PackageReference Include="Hexa.NET.ImPlot" />
+    <PackageReference Include="Hexa.NET.ImPlot3D" />
     <PackageReference Include="Sourcy.DotNet">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

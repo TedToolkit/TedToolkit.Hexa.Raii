@@ -28,4 +28,9 @@ var pipeline = new TedPipeline(
     },
     new FileInfo(Path.Combine(Projects.Build.Directory!.FullName, "appsettings.json")));
 
-await pipeline.ExecuteAsync(p => p.AddModule<GenerateImGuiRaiiCodeModule>()).ConfigureAwait(false);
+await pipeline.ExecuteAsync(p => p
+        .AddModule<GenerateImGuiRaiiCodeModule>()
+        .AddModule<GenerateImNodesRaiiCodeModule>()
+        .AddModule<GenerateImPlotRaiiCodeModule>()
+        .AddModule<GenerateImPlot3DRaiiCodeModule>())
+    .ConfigureAwait(false);
