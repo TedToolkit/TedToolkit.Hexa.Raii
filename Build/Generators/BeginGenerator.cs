@@ -42,6 +42,10 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
             invocation.AddArgument(Argument(parameterInfo));
         }
 
+        method.AddParameter(Parameter(DataType.Bool, "enable").AddDefault("true".ToSimpleName()))
+            .AddStatement("!enable".ToSimpleName().If
+                .AddStatement("default".ToSimpleName().Return));
+
         var creation = new ObjectCreationExpression();
         foreach (var endGeneratorParameterInfo in endGenerator.ParameterInfos)
         {
