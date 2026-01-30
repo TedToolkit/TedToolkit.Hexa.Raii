@@ -1,34 +1,14 @@
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 using TedToolkit.RoslynHelper.Generators.Syntaxes;
 
 namespace Build.Generators;
 
-internal readonly struct PairGenerator
+public readonly struct PairGenerator(Func<MethodInfo, string> begin, Func<MethodInfo, string[]> end)
 {
     private readonly Dictionary<string, List<BeginGenerator>> _begins = [];
-    private readonly Dictionary<string, List<BeginGenerator>> _pushes = [];
     private readonly Dictionary<string, List<EndGenerator>> _ends = [];
-    private readonly Dictionary<string, List<EndGenerator>> _pops = [];
-
-    public PairGenerator(Type type)
-    {
-        foreach (var runtimeMethod in type.GetRuntimeMethods()
-                     .Where(m => m.IsPublic))
-        {
-            var name = runtimeMethod.Name;
-            if (name.StartsWith("Begin"))
-                AddItem(_begins, new BeginGenerator(runtimeMethod, type), name[5..]);
-            else if (name.StartsWith("Push"))
-                AddItem(_pushes, new BeginGenerator(runtimeMethod, type), name[4..]);
-            else if (name.StartsWith("End"))
-                AddItem(_ends, new EndGenerator(runtimeMethod, type), name[3..]);
-            else if (name.StartsWith("Pop"))
-                AddItem(_pops, new EndGenerator(runtimeMethod, type), name[3..]);
-        }
-    }
 
     private static void AddItem<T>(Dictionary<string, List<T>> dict, T item, string name)
     {
@@ -39,12 +19,21 @@ internal readonly struct PairGenerator
             list = [item];
     }
 
-    private static void GenerateItems(TypeDeclaration declaration,
-        Dictionary<string, List<BeginGenerator>> begins, Dictionary<string, List<EndGenerator>> ends)
+    public void AppendMethod(Type type, MethodInfo method)
     {
-        foreach (var (key, beginList) in begins)
+        var beginString = begin(method);
+        if (!string.IsNullOrEmpty(beginString))
+            AddItem(_begins, new BeginGenerator(method, type), beginString);
+
+        foreach (var endString in end(method))
+            AddItem(_ends, new EndGenerator(method, type), endString);
+    }
+
+    public void GenerateItems(TypeDeclaration declaration)
+    {
+        foreach (var (key, beginList) in _begins)
         {
-            if (!ends.TryGetValue(key, out var endList))
+            if (!_ends.TryGetValue(key, out var endList))
                 continue;
 
             var name = string.IsNullOrEmpty(key) ? "Body" : key;
@@ -54,11 +43,5 @@ internal readonly struct PairGenerator
                 beginGenerator.GenerateItem(declaration, endList, name);
             }
         }
-    }
-
-    public void GenerateItems(TypeDeclaration declaration)
-    {
-        GenerateItems(declaration, _begins, _ends);
-        GenerateItems(declaration, _pushes, _pops);
     }
 }
