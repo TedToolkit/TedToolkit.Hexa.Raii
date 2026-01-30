@@ -23,8 +23,16 @@ internal abstract class GenerateRaiiCodeModule : PrepareModule<bool>
     private static readonly IReadOnlyList<Func<PairGenerator>> _defaultGenerators =
     [
         () => new(
-            static method => method.Name.StartsWith("Begin") ? method.Name[5..] : "",
-            static method => method.Name.StartsWith("End") ? [method.Name[3..]] : []),
+            static method => method.Name is "Begin"
+                ? "Window"
+                : method.Name.StartsWith("Begin")
+                    ? method.Name[5..]
+                    : "",
+            static method => method.Name is "End"
+                ? ["Window"]
+                : method.Name.StartsWith("End")
+                    ? [method.Name[3..]]
+                    : []),
 
         () => new(
             static method => method.Name.StartsWith("Push") ? method.Name[4..] : "",
