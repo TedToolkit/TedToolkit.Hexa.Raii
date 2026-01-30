@@ -36,11 +36,9 @@ public readonly struct PairGenerator(Func<MethodInfo, string> begin, Func<Method
             if (!_ends.TryGetValue(key, out var endList))
                 continue;
 
-            var name = string.IsNullOrEmpty(key) ? "Body" : key;
-
             foreach (var beginGenerator in beginList)
             {
-                beginGenerator.GenerateItem(declaration, endList, name);
+                beginGenerator.GenerateItem(declaration, endList, key);
             }
         }
     }
