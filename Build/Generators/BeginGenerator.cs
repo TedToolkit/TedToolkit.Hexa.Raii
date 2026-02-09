@@ -16,10 +16,10 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
     {
         var methodParameters = methodInfo.GetParameters();
 
-        var parameterTypes = methodParameters.Select(i => i.ParameterType).ToArray();
         var (endGenerator, index) = endGenerators
             .Select((endGenerator, index) => (endGenerator, index))
-            .Where(pair => pair.endGenerator.ParameterInfos.All(info => parameterTypes.Contains(info.ParameterType)))
+            .Where(pair => pair.endGenerator.ParameterInfos.All(info1 =>
+                methodParameters.Any(info2 => info1.ParameterType == info2.ParameterType && info1.Name == info2.Name)))
             .OrderByDescending(pair => pair.endGenerator.ParameterInfos.Length)
             .First();
 
@@ -49,7 +49,9 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
         var creation = new ObjectCreationExpression();
         foreach (var endGeneratorParameterInfo in endGenerator.ParameterInfos)
         {
-            var parameter = methodParameters.First(p => p.ParameterType == endGeneratorParameterInfo.ParameterType);
+            var parameter = methodParameters.First(p =>
+                p.ParameterType == endGeneratorParameterInfo.ParameterType
+                && p.Name == endGeneratorParameterInfo.Name);
             creation.AddArgument(Argument(parameter));
         }
 
