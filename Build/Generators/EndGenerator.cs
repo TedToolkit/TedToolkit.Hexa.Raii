@@ -92,7 +92,7 @@ internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
 
         foreach (var parameterInfo in ParameterInfos)
         {
-            structDeclaration.AddParameter(Parameter(parameterInfo, "global"));
+            structDeclaration.AddParameter(Parameter(parameterInfo));
             if (parameterInfo.ParameterType.IsByRef)
             {
                 var fieldName = ZString.Concat('_', parameterInfo.Name);
@@ -101,7 +101,7 @@ internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
                         .AddArgument(Argument(parameterInfo))));
 
                 invocation.AddArgument(Argument("System.Runtime.CompilerServices.Unsafe.AsRef".ToSimpleName()
-                    .Generic(DataType.FromType(parameterInfo.ParameterType, "global"))
+                    .Generic(DataType.FromType(parameterInfo.ParameterType))
                     .Invoke().AddArgument(Argument(fieldName.ToSimpleName())).Ref));
             }
             else

@@ -30,7 +30,7 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
             : endGenerator.GenerateSucceedItem(declaration, name, index);
 
         var method = Method(name, new(isResultItem
-                ? new DataType(typeName).Generic(DataType.FromType(methodInfo.ReturnType, "global"))
+                ? new DataType(typeName).Generic(DataType.FromType(methodInfo.ReturnType))
                 : new DataType(typeName))).Static.Public
             .AddAttribute(Attribute<MethodImplAttribute>()
                 .AddArgument(Argument(MethodImplOptions.AggressiveInlining.ToExpression())));
@@ -38,7 +38,7 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
 
         foreach (var parameterInfo in methodParameters)
         {
-            method.AddParameter(Parameter(parameterInfo, "global"));
+            method.AddParameter(Parameter(parameterInfo));
             invocation.AddArgument(Argument(parameterInfo));
         }
 
