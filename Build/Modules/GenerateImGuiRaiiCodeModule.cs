@@ -22,13 +22,19 @@ internal sealed class GenerateImGuiRaiiCodeModule : GenerateRaiiCodeModule
                 : method.Name.StartsWith("TreeNode")
                     ? method.Name
                     : "",
-            static method => method.Name is "TreePop" ?
-            [
-                "Tree",
-                "TreeNode",
-                "TreeNodeEx",
-                "TreeNodeV",
-                "TreeNodeExV",
-            ] : []),
+            static method => method.Name is "TreePop"
+                ?
+                [
+                    "Tree",
+                    "TreeNode",
+                    "TreeNodeEx",
+                    "TreeNodeV",
+                    "TreeNodeExV",
+                ]
+                : []),
+
+        () => new(
+            static method => method.Name is "Indent" ? "Indent" : "",
+            static method => method.Name is "Unindent" ? ["Indent"] : [])
     ];
 }

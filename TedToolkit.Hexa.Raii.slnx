@@ -9,6 +9,7 @@
     <Build Project="false" />
   </Project>
   <Project Path="TedToolkit.Hexa.Raii.Benchmark/TedToolkit.Hexa.Raii.Benchmark.csproj" />
+  <Project Path="TedToolkit.Hexa.Raii.Console/TedToolkit.Hexa.Raii.Console.csproj" />
   <Project Path="TedToolkit.Hexa.Raii.ImGui/TedToolkit.Hexa.Raii.ImGui.csproj" />
   <Project Path="TedToolkit.Hexa.Raii.ImNodes/TedToolkit.Hexa.Raii.ImNodes.csproj" />
   <Project Path="TedToolkit.Hexa.Raii.ImPlot/TedToolkit.Hexa.Raii.ImPlot.csproj" />
