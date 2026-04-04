@@ -72,6 +72,11 @@ internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
                 .AddAttribute(Attribute<MethodImplAttribute>()
                     .AddArgument(Argument(MethodImplOptions.AggressiveInlining.ToExpression())))
                 .AddParameter(Parameter(new DataType(structName), "value"))
+                .AddStatement("!@value.Succeed".ToSimpleName().Return))
+            .AddMember(Operator(new(DataType.Bool), "!")
+                .AddAttribute(Attribute<MethodImplAttribute>()
+                    .AddArgument(Argument(MethodImplOptions.AggressiveInlining.ToExpression())))
+                .AddParameter(Parameter(new DataType(structName), "value"))
                 .AddStatement("!@value.Succeed".ToSimpleName().Return));
 
         var invocation = GenerateInvocations(structDeclaration);
