@@ -1,5 +1,7 @@
 # TedToolkit.Hexa.Raii
 
+[![Build](https://github.com/TedToolkit/TedToolkit.Scopes/actions/workflows/build.yml/badge.svg)](https://github.com/TedToolkit/TedToolkit.Scopes/actions/workflows/build.yml)
+
 RAII-style scope wrappers for the [Hexa.NET](https://github.com/HexaEngine) family of ImGui bindings. Replace manual `Begin`/`End` and `Push`/`Pop` call pairs with C# `using` statements that guarantee cleanup on scope exit.
 
 ## Packages
@@ -62,15 +64,23 @@ void DrawUI()
                 ImGui.Text("Indented golden text");
             }
         }
+    }
+}
+```
 
-        using (ImGuiRaii.TabItem("Plot"))
-        {
-            using var plot = ImPlotRaii.Plot("My Chart", new Vector2(-1, 200));
-            if (plot)
-            {
-                ImPlot.PlotLine("Data", ref x[0], ref y[0], count);
-            }
-        }
+To use multiple bindings together, install additional packages:
+
+```
+dotnet add package TedToolkit.Hexa.Raii.ImPlot
+```
+
+```csharp
+using (ImGuiRaii.TabItem("Plot"))
+{
+    using var plot = ImPlotRaii.Plot("My Chart", new Vector2(-1, 200));
+    if (plot)
+    {
+        ImPlot.PlotLine("Data", ref x[0], ref y[0], count);
     }
 }
 ```

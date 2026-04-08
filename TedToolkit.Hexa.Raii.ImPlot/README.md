@@ -1,6 +1,10 @@
 # TedToolkit.Hexa.Raii.ImPlot
 
+[![NuGet](https://img.shields.io/nuget/v/TedToolkit.Hexa.Raii.ImPlot)](https://www.nuget.org/packages/TedToolkit.Hexa.Raii.ImPlot)
+
 RAII-style scope wrappers for [Hexa.NET.ImPlot](https://github.com/HexaEngine/Hexa.NET.ImPlot), enabling safe and ergonomic use of ImPlot's `Begin`/`End` and `Push`/`Pop` API pairs via C# `using` statements.
+
+Part of the [TedToolkit.Hexa.Raii](https://github.com/TedToolkit/TedToolkit.Scopes) project.
 
 ## Installation
 
@@ -67,7 +71,7 @@ using (ImPlotRaii.Colormap(ImPlotColormap.Viridis))
 | `Subplots` | `ImPlot.BeginSubplots` | `ImPlot.EndSubplots` |
 | `AlignedPlots` | `ImPlot.BeginAlignedPlots` | `ImPlot.EndAlignedPlots` |
 | `LegendPopup` | `ImPlot.BeginLegendPopup` | `ImPlot.EndLegendPopup` |
-| `Window` | `ImPlot.BeginPlotWindow` | `ImPlot.EndPlotWindow` |
+| `Window` | `ImPlot.Begin` | `ImPlot.End` |
 | `Item` | `ImPlot.BeginItem` | `ImPlot.EndItem` |
 | `StyleColor` | `ImPlot.PushStyleColor` | `ImPlot.PopStyleColor` |
 | `StyleVar` | `ImPlot.PushStyleVar` | `ImPlot.PopStyleVar` |
@@ -77,3 +81,7 @@ using (ImPlotRaii.Colormap(ImPlotColormap.Viridis))
 ## Target Frameworks
 
 net6.0 · net7.0 · net8.0 · net9.0 · net10.0 · netstandard2.0 · netstandard2.1
+
+## License
+
+Licensed under the [GNU Lesser General Public License v3.0](https://github.com/TedToolkit/TedToolkit.Scopes/blob/development/COPYING.LESSER).

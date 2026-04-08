@@ -4,8 +4,8 @@
   <Import Project="..\externals\TedToolkit\props\NugetPackage.props"/>
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0;net9.0;net10.0;netstandard2.0;netstandard2.1</TargetFrameworks>
-    <Title>ImGuiRaii.</Title>
-    <Description>ImGuiRaii.</Description>
+    <Title>TedToolkit.Hexa.Raii.ImGui</Title>
+    <Description>RAII-style scope wrappers for Hexa.NET.ImGui. Zero-allocation readonly ref struct disposables that guarantee ImGui Begin/End and Push/Pop cleanup via C# using statements.</Description>
     <RootNamespace>TedToolkit.Hexa.Raii</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

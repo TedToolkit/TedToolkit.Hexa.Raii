@@ -18,7 +18,7 @@ namespace Build.Modules;
 /// <summary>
 /// Generate the code with raii.
 /// </summary>
-internal abstract class GenerateRaiiCodeModule : PrepareModule<bool>
+public abstract class GenerateRaiiCodeModule : PrepareModule<bool>
 {
     private static readonly IReadOnlyList<Func<PairGenerator>> _defaultGenerators =
     [
@@ -45,7 +45,7 @@ internal abstract class GenerateRaiiCodeModule : PrepareModule<bool>
     protected virtual IReadOnlyList<Func<PairGenerator>> AdditionalGenerators => [];
 
     /// <inheritdoc />
-    protected sealed override async Task<bool> ExecuteAsync(IPipelineContext context,
+    protected sealed override async Task<bool> ExecuteAsync(IModuleContext context,
         CancellationToken cancellationToken)
     {
         var className = ZString.Concat(TargetType.Name, "Raii");

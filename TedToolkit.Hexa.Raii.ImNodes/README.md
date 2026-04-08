@@ -1,6 +1,10 @@
 # TedToolkit.Hexa.Raii.ImNodes
 
+[![NuGet](https://img.shields.io/nuget/v/TedToolkit.Hexa.Raii.ImNodes)](https://www.nuget.org/packages/TedToolkit.Hexa.Raii.ImNodes)
+
 RAII-style scope wrappers for [Hexa.NET.ImNodes](https://github.com/HexaEngine/Hexa.NET.ImNodes), enabling safe and ergonomic use of ImNodes' `Begin`/`End` and `Push`/`Pop` API pairs via C# `using` statements.
+
+Part of the [TedToolkit.Hexa.Raii](https://github.com/TedToolkit/TedToolkit.Scopes) project.
 
 ## Installation
 
@@ -75,3 +79,7 @@ using (ImNodesRaii.ColorStyle(ImNodesCol.NodeBackground, 0xFF2255AA))
 ## Target Frameworks
 
 net6.0 · net7.0 · net8.0 · net9.0 · net10.0 · netstandard2.0 · netstandard2.1
+
+## License
+
+Licensed under the [GNU Lesser General Public License v3.0](https://github.com/TedToolkit/TedToolkit.Scopes/blob/development/COPYING.LESSER).

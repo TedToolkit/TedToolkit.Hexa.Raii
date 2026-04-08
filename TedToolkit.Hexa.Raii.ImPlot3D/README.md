@@ -1,6 +1,10 @@
 # TedToolkit.Hexa.Raii.ImPlot3D
 
+[![NuGet](https://img.shields.io/nuget/v/TedToolkit.Hexa.Raii.ImPlot3D)](https://www.nuget.org/packages/TedToolkit.Hexa.Raii.ImPlot3D)
+
 RAII-style scope wrappers for [Hexa.NET.ImPlot3D](https://github.com/HexaEngine/Hexa.NET.ImPlot3D), enabling safe and ergonomic use of ImPlot3D's `Begin`/`End` and `Push`/`Pop` API pairs via C# `using` statements.
+
+Part of the [TedToolkit.Hexa.Raii](https://github.com/TedToolkit/TedToolkit.Scopes) project.
 
 ## Installation
 
@@ -63,3 +67,7 @@ using (ImPlot3DRaii.Plot("My 3D Plot", enable: show3D))
 ## Target Frameworks
 
 net6.0 · net7.0 · net8.0 · net9.0 · net10.0 · netstandard2.0 · netstandard2.1
+
+## License
+
+Licensed under the [GNU Lesser General Public License v3.0](https://github.com/TedToolkit/TedToolkit.Scopes/blob/development/COPYING.LESSER).
