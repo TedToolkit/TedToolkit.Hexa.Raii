@@ -8,6 +8,8 @@
 using Build;
 using Build.Modules;
 
+using ModularPipelines.Extensions;
+
 using Sourcy.DotNet;
 
 using TedToolkit.ModularPipelines;
