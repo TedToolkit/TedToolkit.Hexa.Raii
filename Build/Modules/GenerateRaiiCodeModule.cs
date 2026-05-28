@@ -32,7 +32,8 @@ public abstract class GenerateRaiiCodeModule : PrepareModule<bool>
                 ? ["Window"]
                 : method.Name.StartsWith("End")
                     ? [method.Name[3..]]
-                    : []),
+                    : [],
+            static method => method.Name is "Begin" or "BeginChild"),
 
         () => new(
             static method => method.Name.StartsWith("Push") ? method.Name[4..] : "",

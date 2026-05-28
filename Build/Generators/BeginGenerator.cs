@@ -10,7 +10,7 @@ using static TedToolkit.RoslynHelper.Generators.SourceComposer<
 
 namespace Build.Generators;
 
-internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
+internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type, bool endAlways)
 {
     public void GenerateItem(TypeDeclaration declaration, IReadOnlyList<EndGenerator> endGenerators, string name)
     {
@@ -27,7 +27,7 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
         var isResultItem = needAddSucceed && methodInfo.ReturnType != typeof(bool);
         var typeName = isResultItem
             ? endGenerator.GenerateResultItem(declaration, name, index)
-            : endGenerator.GenerateSucceedItem(declaration, name, index);
+            : endGenerator.GenerateSucceedItem(declaration, name, index, endAlways);
 
         var method = Method(name, new(isResultItem
                 ? new DataType(typeName).Generic(DataType.FromType(methodInfo.ReturnType))
@@ -58,6 +58,9 @@ internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type)
         creation.AddArgument(Argument(needAddSucceed
             ? "succeed".ToSimpleName()
             : "true".ToSimpleName()));
+
+        if (endAlways)
+            creation.AddArgument(Argument("true".ToSimpleName()));
 
         declaration.AddMember(method
             .AddStatement(needAddSucceed

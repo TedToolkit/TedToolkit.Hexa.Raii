@@ -51,7 +51,7 @@ internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
         return structName;
     }
 
-    public string GenerateSucceedItem(TypeDeclaration declaration, string name, int index)
+    public string GenerateSucceedItem(TypeDeclaration declaration, string name, int index, bool endAlways)
     {
         var structName = GetStructName(name, index);
         if (_isGeneratedSucceed)
@@ -81,12 +81,15 @@ internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
 
         var invocation = GenerateInvocations(structDeclaration);
 
+        structDeclaration.AddParameter(Parameter(DataType.Bool, "succeed"));
+        if (endAlways)
+            structDeclaration.AddParameter(Parameter(DataType.Bool, "entered"));
+
         declaration.AddMember(structDeclaration
-            .AddParameter(Parameter(DataType.Bool, "succeed"))
             .AddMember(Method(nameof(IDisposable.Dispose)).Public
                 .AddAttribute(Attribute<MethodImplAttribute>()
                     .AddArgument(Argument(MethodImplOptions.AggressiveInlining.ToExpression())))
-                .AddStatement("Succeed".ToSimpleName().If
+                .AddStatement((endAlways ? "entered" : "Succeed").ToSimpleName().If
                     .AddStatement(invocation))));
         return structName;
     }
