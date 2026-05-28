@@ -5,7 +5,10 @@ using TedToolkit.RoslynHelper.Generators.Syntaxes;
 
 namespace Build.Generators;
 
-public readonly struct PairGenerator(Func<MethodInfo, string> begin, Func<MethodInfo, string[]> end)
+public readonly struct PairGenerator(
+    Func<MethodInfo, string> begin,
+    Func<MethodInfo, string[]> end,
+    Func<MethodInfo, bool>? endAlways = null)
 {
     private readonly Dictionary<string, List<BeginGenerator>> _begins = [];
     private readonly Dictionary<string, List<EndGenerator>> _ends = [];
@@ -23,7 +26,7 @@ public readonly struct PairGenerator(Func<MethodInfo, string> begin, Func<Method
     {
         var beginString = begin(method);
         if (!string.IsNullOrEmpty(beginString))
-            AddItem(_begins, new BeginGenerator(method, type), beginString);
+            AddItem(_begins, new BeginGenerator(method, type, endAlways?.Invoke(method) ?? false), beginString);
 
         foreach (var endString in end(method))
             AddItem(_ends, new EndGenerator(method, type), endString);
