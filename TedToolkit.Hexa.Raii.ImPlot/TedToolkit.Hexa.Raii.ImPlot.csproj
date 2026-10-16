@@ -8,6 +8,7 @@
     <Description>RAII-style scope wrappers for Hexa.NET.ImPlot. Zero-allocation readonly ref struct disposables that guarantee ImPlot Begin/End and Push/Pop cleanup via C# using statements.</Description>
     <RootNamespace>TedToolkit.Hexa.Raii</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard' Or '$(TargetFrameworkIdentifier)' == '.NETFramework'">
