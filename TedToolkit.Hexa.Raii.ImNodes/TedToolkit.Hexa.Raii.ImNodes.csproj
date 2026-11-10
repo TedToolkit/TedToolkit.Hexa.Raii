@@ -18,4 +18,9 @@
   <ItemGroup>
     <PackageReference Include="Hexa.NET.ImNodes" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../.agents/skills/balance-imnodes-scopes/**/*"
+          Pack="true" PackagePath="skills/balance-imnodes-scopes/" />
+  </ItemGroup>
 </Project>
