@@ -18,4 +18,9 @@
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard' Or '$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe"/>
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../.agents/skills/balance-imgui-scopes/**/*"
+          Pack="true" PackagePath="skills/balance-imgui-scopes/" />
+  </ItemGroup>
 </Project>
