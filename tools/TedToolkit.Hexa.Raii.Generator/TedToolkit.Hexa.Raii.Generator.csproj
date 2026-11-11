@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net11.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Hexa.NET.ImGui" />
+    <PackageReference Include="Hexa.NET.ImNodes" />
+    <PackageReference Include="Hexa.NET.ImPlot" />
+    <PackageReference Include="Hexa.NET.ImPlot3D" />
+    <PackageReference Include="TedToolkit.FileSystem" />
+    <PackageReference Include="TedToolkit.Orchestration.Pipeline" />
+    <PackageReference Include="TedToolkit.RoslynHelper" />
+  </ItemGroup>
+</Project>
