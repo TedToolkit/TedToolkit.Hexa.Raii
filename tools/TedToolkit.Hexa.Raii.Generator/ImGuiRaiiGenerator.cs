@@ -1,18 +1,16 @@
-using Build.Generators;
+using TedToolkit.Hexa.Raii.Generator.Composition;
 
 using Hexa.NET.ImGui;
 
-using Sourcy.DotNet;
-
-namespace Build.Modules;
+namespace TedToolkit.Hexa.Raii.Generator;
 
 /// <summary>
 /// Generate the code with ImGui.
 /// </summary>
-public sealed class GenerateImGuiRaiiCodeModule : GenerateRaiiCodeModule
+internal sealed class ImGuiRaiiGenerator : RaiiGenerator
 {
     protected override Type TargetType => typeof(ImGui);
-    protected override FileInfo Project => Projects.TedToolkit_Hexa_Raii_ImGui;
+    protected override string ProjectDirectory => "TedToolkit.Hexa.Raii.ImGui";
 
     protected override IReadOnlyList<Func<PairGenerator>> AdditionalGenerators { get; } =
     [

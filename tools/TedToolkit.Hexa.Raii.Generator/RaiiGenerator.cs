@@ -1,24 +1,20 @@
 using System.Reflection;
 
-using Build.Generators;
+using TedToolkit.Hexa.Raii.Generator.Composition;
+using TedToolkit.FileSystem;
 
-using Cysharp.Text;
-
-using ModularPipelines.Context;
-
-using TedToolkit.ModularPipelines.Modules;
 using TedToolkit.RoslynHelper;
 
 using static TedToolkit.RoslynHelper.SourceComposer;
 using static TedToolkit.RoslynHelper.SourceComposer<
-    Build.Modules.GenerateImGuiRaiiCodeModule>;
+    TedToolkit.Hexa.Raii.Generator.ImGuiRaiiGenerator>;
 
-namespace Build.Modules;
+namespace TedToolkit.Hexa.Raii.Generator;
 
 /// <summary>
 /// Generate the code with raii.
 /// </summary>
-public abstract class GenerateRaiiCodeModule : PrepareModule<bool>
+internal abstract class RaiiGenerator
 {
     private static readonly IReadOnlyList<Func<PairGenerator>> _defaultGenerators =
     [
@@ -41,15 +37,13 @@ public abstract class GenerateRaiiCodeModule : PrepareModule<bool>
     ];
 
     protected abstract Type TargetType { get; }
-    protected abstract FileInfo Project { get; }
+    protected abstract string ProjectDirectory { get; }
 
     protected virtual IReadOnlyList<Func<PairGenerator>> AdditionalGenerators => [];
 
-    /// <inheritdoc />
-    protected sealed override async Task<bool> ExecuteAsync(IModuleContext context,
-        CancellationToken cancellationToken)
+    internal async Task GenerateAsync(DirectoryPath repository, CancellationToken cancellationToken)
     {
-        var className = ZString.Concat(TargetType.Name, "Raii");
+        var className = TargetType.Name + "Raii";
         var raii = Class(className).Public.Static.Partial.Unsafe;
 
         var generators = _defaultGenerators
@@ -75,8 +69,7 @@ public abstract class GenerateRaiiCodeModule : PrepareModule<bool>
             .AddNameSpace(NameSpace("TedToolkit.Hexa.Raii").AddMember(raii))
             .ToCode();
 
-        var file = Path.Combine(Project.Directory!.FullName, ZString.Concat(className, ".g.cs"));
-        await System.IO.File.WriteAllTextAsync(file, codes, cancellationToken).ConfigureAwait(false);
-        return true;
+        var file = repository / ProjectDirectory / className.AsFileName("g.cs");
+        await file.WriteAllTextAsync(codes, cancellationToken).ConfigureAwait(false);
     }
 }

@@ -12,8 +12,9 @@
     <PackageVersion Include="Hexa.NET.ImPlot3D" Version="2.2.9" />
     <PackageVersion Include="Hexa.NET.OpenGL3" Version="1.1.0" />
     <PackageVersion Include="Hexa.NET.SDL3" Version="1.2.16" />
-    <PackageVersion Include="Sourcy.DotNet" Version="1.1.1" />
     <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
+    <PackageVersion Include="TedToolkit.FileSystem" Version="2026.10.16" />
+    <PackageVersion Include="TedToolkit.Orchestration.Pipeline" Version="2026.10.16" />
     <PackageVersion Include="TedToolkit.RoslynHelper" Version="2026.11.11" />
   </ItemGroup>
 </Project>
