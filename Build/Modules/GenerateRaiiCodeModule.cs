@@ -7,10 +7,10 @@ using Cysharp.Text;
 using ModularPipelines.Context;
 
 using TedToolkit.ModularPipelines.Modules;
-using TedToolkit.RoslynHelper.Generators;
+using TedToolkit.RoslynHelper;
 
-using static TedToolkit.RoslynHelper.Generators.SourceComposer;
-using static TedToolkit.RoslynHelper.Generators.SourceComposer<
+using static TedToolkit.RoslynHelper.SourceComposer;
+using static TedToolkit.RoslynHelper.SourceComposer<
     Build.Modules.GenerateImGuiRaiiCodeModule>;
 
 namespace Build.Modules;
