@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-using TedToolkit.RoslynHelper.Generators.Syntaxes;
+using TedToolkit.RoslynHelper.Syntaxes;
 
 namespace Build.Generators;
 

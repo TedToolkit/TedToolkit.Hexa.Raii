@@ -19,4 +19,9 @@
     <PackageReference Include="Hexa.NET.ImPlot3D" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Include="../.agents/skills/balance-implot3d-scopes/**/*"
+          Pack="true" PackagePath="skills/balance-implot3d-scopes/" />
+  </ItemGroup>
 </Project>
