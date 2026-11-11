@@ -1,16 +1,14 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-using Cysharp.Text;
-
 using TedToolkit.RoslynHelper;
 using TedToolkit.RoslynHelper.Syntaxes;
 
 using static TedToolkit.RoslynHelper.SourceComposer;
 using static TedToolkit.RoslynHelper.SourceComposer<
-    Build.Generators.EndGenerator>;
+    TedToolkit.Hexa.Raii.Generator.Composition.EndGenerator>;
 
-namespace Build.Generators;
+namespace TedToolkit.Hexa.Raii.Generator.Composition;
 
 internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
 {
@@ -103,7 +101,7 @@ internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
             structDeclaration.AddParameter(Parameter(parameterInfo));
             if (parameterInfo.ParameterType.IsByRef)
             {
-                var fieldName = ZString.Concat('_', parameterInfo.Name);
+                var fieldName = "_" + parameterInfo.Name;
                 structDeclaration.AddMember(Field(new DataType("void*"), fieldName).Private.Readonly
                     .AddDefault("System.Runtime.CompilerServices.Unsafe.AsPointer".ToSimpleName().Invoke()
                         .AddArgument(Argument(parameterInfo))));
@@ -122,5 +120,5 @@ internal sealed class EndGenerator(MethodInfo methodInfo, Type type)
     }
 
     private static string GetStructName(string name, int index)
-        => ZString.Concat(name, "Disposable", index);
+        => $"{name}Disposable{index}";
 }

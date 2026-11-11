@@ -5,7 +5,7 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
   </Folder>
-  <Project Path="Build/Build.csproj">
+  <Project Path="tools/TedToolkit.Hexa.Raii.Generator/TedToolkit.Hexa.Raii.Generator.csproj">
     <Build Project="false" />
   </Project>
   <Project Path="TedToolkit.Hexa.Raii.Benchmark/TedToolkit.Hexa.Raii.Benchmark.csproj" />

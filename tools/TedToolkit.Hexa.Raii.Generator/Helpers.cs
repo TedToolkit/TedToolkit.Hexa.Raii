@@ -3,7 +3,7 @@
 using TedToolkit.RoslynHelper;
 using TedToolkit.RoslynHelper.Syntaxes;
 
-namespace Build;
+namespace TedToolkit.Hexa.Raii.Generator;
 
 internal static class Helpers
 {

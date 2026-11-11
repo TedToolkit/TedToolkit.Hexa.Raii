@@ -6,9 +6,9 @@ using TedToolkit.RoslynHelper.Syntaxes;
 
 using static TedToolkit.RoslynHelper.SourceComposer;
 using static TedToolkit.RoslynHelper.SourceComposer<
-    Build.Generators.BeginGenerator>;
+    TedToolkit.Hexa.Raii.Generator.Composition.BeginGenerator>;
 
-namespace Build.Generators;
+namespace TedToolkit.Hexa.Raii.Generator.Composition;
 
 internal readonly struct BeginGenerator(MethodInfo methodInfo, Type type, bool endAlways)
 {

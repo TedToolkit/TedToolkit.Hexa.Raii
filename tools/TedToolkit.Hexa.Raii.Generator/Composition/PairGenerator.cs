@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 using TedToolkit.RoslynHelper.Syntaxes;
 
-namespace Build.Generators;
+namespace TedToolkit.Hexa.Raii.Generator.Composition;
 
 public readonly struct PairGenerator(
     Func<MethodInfo, string> begin,
